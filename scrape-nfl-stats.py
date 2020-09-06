@@ -230,8 +230,8 @@ class Player():
         soup = BeautifulSoup(response.content, 'html.parser')
 
         profile_section = soup.find('div', {'id': 'meta'})
-        self.profile['name'] = profile_section.find('h1', {'itemprop': 'name'}).contents[0]
-        print('scaping {}'.format(self.profile['name']))
+        self.profile['name'] = profile_section.find('h1', {'itemprop': 'name'}).find('span').contents[0]
+        print('scraping {}'.format(self.profile['name']))
 
         profile_attributes = profile_section.find_all('p')
         current_attribute = 1
@@ -491,6 +491,23 @@ class Player():
             if punting_blocked is not None and len(punting_blocked) > 0:
                 stats['punting_blocked'] = int(punting_blocked.contents[0])
 
+            #Fumble Stats
+            fumbles = game.find('td', {'data-stat': 'fumbles'})
+            if fumbles is not None and len(fumbles) > 0:
+                stats['fumbles'] = int(fumbles.contents[0])
+
+            fumbles_lost = game.find('td', {'data-stat': 'fumbles_lost'})
+            if fumbles_lost is not None and len(fumbles_lost) > 0:
+                stats['fumbles_lost'] = int(fumbles_lost.contents[0])
+
+            fumbles_forced = game.find('td', {'data-stat': 'fumbles_forced'})
+            if fumbles_forced is not None and len(fumbles_forced) > 0:
+                stats['fumbles_forced'] = int(fumbles_forced.contents[0])
+
+            fumbles_rec = game.find('td', {'data-stat': 'fumbles_rec'})
+            if fumbles_rec is not None and len(fumbles_rec) > 0:
+                stats['fumbles_rec'] = int(fumbles_rec.contents[0])
+
             self.game_stats.append(stats)
 
     @staticmethod
@@ -560,7 +577,12 @@ class Player():
             # Punting
             'punting_attempts': 0,
             'punting_yards': 0,
-            'punting_blocked': 0
+            'punting_blocked': 0,
+            #Fumbles
+            'fumbles': 0,
+            'fumbles_lost': 0,
+            'fumbles_forced': 0,
+            'fumbles_rec' : 0
         }
 
     def get_seasons_with_stats(self, profile_soup):
