@@ -457,6 +457,10 @@ class Player():
             if defense_interception_yards is not None and len(defense_interception_yards) > 0:
                 stats['defense_interception_yards'] = int(defense_interception_yards.contents[0])
 
+            defense_interception_tds = game.find('td', {'data-stat': 'def_int_td'})
+            if defense_interception_tds is not None and len(defense_interception_tds) > 0:
+                stats['defense_interception_touchdowns'] = int(defense_interception_tds.contents[0])
+
             defense_safeties = game.find('td', {'data-stat': 'safety_md'})
             if defense_safeties is not None and len(defense_safeties) > 0:
                 stats['defense_safeties'] = int(defense_safeties.contents[0])
