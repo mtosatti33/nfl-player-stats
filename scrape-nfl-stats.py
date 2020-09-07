@@ -294,7 +294,7 @@ class Player():
             self.profile['current_salary'] = profile_attributes[current_attribute].contents[2].contents[0]
             current_attribute += 1
 
-        if ((current_attribute + 1) <= num_attributes) and profile_attributes[current_attribute].contents[0].contents[0] == 'Hall of fame':
+        if ((current_attribute + 1) <= num_attributes) and profile_attributes[current_attribute].contents[0].contents[0] == 'Hall of Fame':
             self.profile['hof_induction_year'] = profile_attributes[current_attribute].contents[2].contents[0]
             current_attribute += 1
 
