@@ -622,6 +622,6 @@ class Player():
 
 if __name__ == '__main__':
     letters_to_scrape = list(string.ascii_uppercase)
-    nfl_scraper = Scraper(letters_to_scrape=letters_to_scrape, num_jobs=10, clear_old_data=False)
+    nfl_scraper = Scraper(letters_to_scrape=letters_to_scrape, num_jobs=10, clear_old_data=True)
 
     nfl_scraper.scrape_site()
