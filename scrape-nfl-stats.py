@@ -205,6 +205,7 @@ class Player():
         self.profile = {
             'player_id': player_id,
             'name': None,
+            'image': None,
             'position': None,
             'height': None,
             'weight': None,
@@ -233,11 +234,18 @@ class Player():
         self.profile['name'] = profile_section.find('h1', {'itemprop': 'name'}).find('span').contents[0]
         print('scraping {}'.format(self.profile['name']))
 
+        image = soup.find('div', {'class': 'media-item'})
+        if image is not None:
+            self.profile['image'] = image.find('img').get('src')
+
         profile_attributes = profile_section.find_all('p')
         current_attribute = 1
         num_attributes = len(profile_attributes)
 
-        self.profile['position'] = profile_attributes[current_attribute].contents[2].split('\n')[0].split(' ')[1]
+        try:
+            self.profile['position'] = profile_attributes[current_attribute].contents[2].split('\n')[0].split(' ')[1]
+        except IndexError:
+            pass
         current_attribute += 1
 
         height = profile_attributes[current_attribute].find('span', {'itemprop': 'height'})
@@ -271,7 +279,10 @@ class Player():
             current_attribute += 1
 
         if profile_attributes[current_attribute].contents[0].contents[0] == 'College':
-            self.profile['college'] = profile_attributes[current_attribute].contents[2].contents[0]
+            try:
+                self.profile['college'] = profile_attributes[current_attribute].contents[2].contents[0]
+            except IndexError:
+                pass
             current_attribute += 1
 
         # Skip weighted career AV
