@@ -208,7 +208,9 @@ class Player():
             'image': None,
             'position': None,
             'height': None,
+            'height_meters': None,
             'weight': None,
+            'weight_kilograms': None,
             'current_team': None,
             'birth_date': None,
             'birth_place': None,
@@ -249,11 +251,15 @@ class Player():
         current_attribute += 1
 
         height = profile_attributes[current_attribute].find('span', {'itemprop': 'height'})
+                
         if height is not None:
             self.profile['height'] = height.contents[0]
+            self.profile['height_meters'] = re.split('\xa0\(',profile_attributes[current_attribute].contents[3].split('cm')[0])[1]
+
         weight = profile_attributes[current_attribute].find('span', {'itemprop': 'weight'})
         if weight is not None:
             self.profile['weight'] = weight.contents[0].split('lb')[0]
+            self.profile['weight_kilograms'] = re.split(',',profile_attributes[current_attribute].contents[3].split('kg')[0])[1].strip()
         if height is not None or weight is not None:
             current_attribute += 1
 
