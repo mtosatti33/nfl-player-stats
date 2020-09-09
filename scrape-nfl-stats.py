@@ -233,9 +233,11 @@ class Player():
         soup = BeautifulSoup(response.content, 'html.parser')
 
         profile_section = soup.find('div', {'id': 'meta'})
+        #name
         self.profile['name'] = profile_section.find('h1', {'itemprop': 'name'}).find('span').contents[0]
         print('scraping {}'.format(self.profile['name']))
 
+        #image
         image = soup.find('div', {'class': 'media-item'})
         if image is not None:
             self.profile['image'] = image.find('img').get('src')
@@ -244,18 +246,20 @@ class Player():
         current_attribute = 1
         num_attributes = len(profile_attributes)
 
+        #position
         try:
             self.profile['position'] = profile_attributes[current_attribute].contents[2].split('\n')[0].split(' ')[1]
         except IndexError:
             pass
         current_attribute += 1
 
-        height = profile_attributes[current_attribute].find('span', {'itemprop': 'height'})
-                
+        #height
+        height = profile_attributes[current_attribute].find('span', {'itemprop': 'height'})               
         if height is not None:
             self.profile['height'] = height.contents[0]
             self.profile['height_meters'] = re.split('\xa0\(',profile_attributes[current_attribute].contents[3].split('cm')[0])[1]
 
+        #weight
         weight = profile_attributes[current_attribute].find('span', {'itemprop': 'weight'})
         if weight is not None:
             self.profile['weight'] = weight.contents[0].split('lb')[0]
@@ -263,11 +267,13 @@ class Player():
         if height is not None or weight is not None:
             current_attribute += 1
 
+        #current team
         affiliation_section = profile_section.find('span', {'itemprop': 'affiliation'})
         if affiliation_section is not None:
             self.profile['current_team'] = affiliation_section.contents[0].contents[0]
             current_attribute += 1
 
+        #birth
         birth_date = profile_attributes[current_attribute].find('span', {'itemprop': 'birthDate'})
         if birth_date is not None:
             self.profile['birth_date'] = birth_date['data-birth']
@@ -279,11 +285,13 @@ class Player():
         if birth_date is not None or len(birth_place_section) > 0:
             current_attribute += 1
 
+        #death
         death_section = profile_section.find('span', {'itemprop': 'deathDate'})
         if death_section is not None:
             self.profile['death_date'] = death_section['data-death']
             current_attribute += 1
 
+        #college
         if profile_attributes[current_attribute].contents[0].contents[0] == 'College':
             try:
                 self.profile['college'] = profile_attributes[current_attribute].contents[2].contents[0]
@@ -294,10 +302,12 @@ class Player():
         # Skip weighted career AV
         current_attribute += 1
 
+        #high school
         if ((current_attribute + 1) <= num_attributes) and profile_attributes[current_attribute].contents[0].contents[0] == 'High School':
             self.profile['high_school'] = profile_attributes[current_attribute].contents[2].contents[0] + ', ' + profile_attributes[current_attribute].contents[4].contents[0]
             current_attribute += 1
 
+        #draft
         if ((current_attribute + 1) <= num_attributes) and profile_attributes[current_attribute].contents[0].contents[0] == 'Draft':
             self.profile['draft_team'] = profile_attributes[current_attribute].contents[2].contents[0]
             draft_info = profile_attributes[current_attribute].contents[3].split(' ')
@@ -306,11 +316,13 @@ class Player():
             self.profile['draft_year'] = re.findall(r'\d+', profile_attributes[current_attribute].contents[4].contents[0])[0]
             current_attribute += 1
 
+        #current salary
         if ((current_attribute + 1) <= num_attributes) and profile_attributes[current_attribute].contents[0].contents[0] == 'Current cap hit':
             profile_attributes[current_attribute].contents
             self.profile['current_salary'] = profile_attributes[current_attribute].contents[2].contents[0]
             current_attribute += 1
 
+        #hall of fame induction
         if ((current_attribute + 1) <= num_attributes) and profile_attributes[current_attribute].contents[0].contents[0] == 'Hall of Fame':
             self.profile['hof_induction_year'] = profile_attributes[current_attribute].contents[2].contents[0]
             current_attribute += 1
