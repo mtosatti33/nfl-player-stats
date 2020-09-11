@@ -205,7 +205,6 @@ class Player():
         self.profile = {
             'player_id': player_id,
             'name': None,
-            'image': None,
             'position': None,
             'height': None,
             'height_meters': None,
@@ -236,11 +235,6 @@ class Player():
         #name
         self.profile['name'] = profile_section.find('h1', {'itemprop': 'name'}).find('span').contents[0]
         print('scraping {}'.format(self.profile['name']))
-
-        #image
-        image = soup.find('div', {'class': 'media-item'})
-        if image is not None:
-            self.profile['image'] = image.find('img').get('src')
 
         profile_attributes = profile_section.find_all('p')
         current_attribute = 1
