@@ -147,7 +147,7 @@ class Scraper():
                 - player_links (str[]): the URLs to get player profiles
         """
 
-        # TODO: plans to replace this for the players file
+        # TODO: plans to replace this for the 'players' file
         response = self.get_page(PLAYER_LIST_URL.format(letter))
         soup = BeautifulSoup(response.content, 'html.parser')
 

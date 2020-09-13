@@ -112,3 +112,4 @@ ENV/
 players_2
 players
 test.ipynb
+.vscode/launch.json
