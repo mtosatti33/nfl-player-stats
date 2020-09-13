@@ -109,3 +109,5 @@ ENV/
 
 # temporary files
 *.swp
+players_2
+players
