@@ -253,7 +253,7 @@ class Player():
         height = profile_attributes[current_attribute].find('span', {'itemprop': 'height'})               
         if height is not None:
             self.profile['height'] = height.contents[0]
-            self.profile['height_meters'] = re.split('\xa0\(',profile_attributes[current_attribute].contents[3].split('cm')[0])[1]
+            self.profile['height_meters'] = re.split(r'\xa0\(',profile_attributes[current_attribute].contents[3].split('cm')[0])[1]
 
         #weight
         weight = profile_attributes[current_attribute].find('span', {'itemprop': 'weight'})
