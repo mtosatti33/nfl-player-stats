@@ -136,7 +136,6 @@ class Scraper():
         with open(filename, 'w') as fout:
             json.dump(games, fout)
             
-
     def get_players_for_letter(self, letter):
         """Get a list of player links for a letter of the alphabet.
             Site organizes players by first letter of last name.
