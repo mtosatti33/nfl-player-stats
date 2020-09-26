@@ -1,6 +1,8 @@
 # Repo
 /profile_data
+/profile_data.bak
 /stats_data
+/stats_data.bak
 games_*.json
 profiles_*.json
 *.sqlite3

@@ -247,6 +247,8 @@ class Player():
             self.profile['position'] = profile_attributes[current_attribute].contents[2].split('\n')[0].split(' ')[1]
         except IndexError:
             pass
+        except:
+            pass
         current_attribute += 1
 
         #height
@@ -300,7 +302,13 @@ class Player():
 
         #high school
         if ((current_attribute + 1) <= num_attributes) and profile_attributes[current_attribute].contents[0].contents[0] == 'High School':
-            self.profile['high_school'] = profile_attributes[current_attribute].contents[2].contents[0] + ', ' + profile_attributes[current_attribute].contents[4].contents[0]
+            try:
+                self.profile['high_school'] = profile_attributes[current_attribute].contents[2].contents[0] + ', ' + profile_attributes[current_attribute].contents[4].contents[0]
+            except IndexError:
+                try:
+                    self.profile['high_school'] = profile_attributes[current_attribute].contents[2].contents[0]
+                except IndexError:
+                    pass
             current_attribute += 1
 
         #draft
@@ -367,17 +375,20 @@ class Player():
             else:
                 stats['game_location'] = 'H'
             stats['opponent'] = game.find('td', {'data-stat': 'opp'}).contents[0].contents[0]
-            result = game.find('td', {'data-stat': 'game_result'}).contents[0].contents[0]
-            stats['game_won'] = (result.split(' ')[0] == 'W')
-            stats['player_team_score'] = result.split(' ')[1].split('-')[0]
-            stats['opponent_score'] = result.split(' ')[1].split('-')[1]
+            try:
+                result = game.find('td', {'data-stat': 'game_result'}).contents[0].contents[0]
+                stats['game_won'] = (result.split(' ')[0] == 'W')
+                stats['player_team_score'] = result.split(' ')[1].split('-')[0]
+                stats['opponent_score'] = result.split(' ')[1].split('-')[1]
+            except IndexError:
+                pass
 
             # Collect passing stats
-            pass_attempts = game.find('td', {'data-stat': 'pass_cmp'})
+            pass_attempts = game.find('td', {'data-stat': 'pass_att'})
             if pass_attempts is not None and len(pass_attempts) > 0:
                 stats['passing_attempts'] = int(pass_attempts.contents[0])
 
-            pass_completions = game.find('td', {'data-stat': 'pass_att'})
+            pass_completions = game.find('td', {'data-stat': 'pass_cmp'})
             if pass_completions is not None and len(pass_completions) > 0:
                 stats['passing_completions'] = int(pass_completions.contents[0])
 
@@ -491,11 +502,11 @@ class Player():
                 stats['defense_safeties'] = int(defense_safeties.contents[0])
 
             # Collect kicking stats
-            point_after_attemps = game.find('td', {'data-stat': 'xpm'})
-            if point_after_attemps is not None and len(point_after_attemps) > 0:
-                stats['point_after_attemps'] = int(point_after_attemps.contents[0])
+            point_after_attempts = game.find('td', {'data-stat': 'xpa'})
+            if point_after_attempts is not None and len(point_after_attempts) > 0:
+                stats['point_after_attempts'] = int(point_after_attempts.contents[0])
 
-            point_after_makes = game.find('td', {'data-stat': 'xpa'})
+            point_after_makes = game.find('td', {'data-stat': 'xpm'})
             if point_after_makes is not None and len(point_after_makes) > 0:
                 stats['point_after_makes'] = int(point_after_makes.contents[0])
 
@@ -599,7 +610,7 @@ class Player():
             'defense_interception_touchdowns': 0,
             'defense_safeties': 0,
             # Kicking
-            'point_after_attemps': 0,
+            'point_after_attempts': 0,
             'point_after_makes': 0,
             'field_goal_attempts': 0,
             'field_goal_makes': 0,
