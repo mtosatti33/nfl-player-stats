@@ -531,7 +531,7 @@ class Player():
             if punting_blocked is not None and len(punting_blocked) > 0:
                 stats['punting_blocked'] = int(punting_blocked.contents[0])
 
-            #Fumble Stats
+            # Collect Fumble Stats
             fumbles = game.find('td', {'data-stat': 'fumbles'})
             if fumbles is not None and len(fumbles) > 0:
                 stats['fumbles'] = int(fumbles.contents[0])
