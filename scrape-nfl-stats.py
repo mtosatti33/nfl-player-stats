@@ -377,7 +377,7 @@ class Player():
             stats['opponent'] = game.find('td', {'data-stat': 'opp'}).contents[0].contents[0]
             try:
                 result = game.find('td', {'data-stat': 'game_result'}).contents[0].contents[0]
-                stats['game_won'] = (result.split(' ')[0] == 'W')
+                stats['game_won'] = result.split('-')[0].split(' ')[0]
                 stats['player_team_score'] = result.split(' ')[1].split('-')[0]
                 stats['opponent_score'] = result.split(' ')[1].split('-')[1]
             except IndexError:
