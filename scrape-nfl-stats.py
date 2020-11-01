@@ -384,228 +384,169 @@ class Player():
                 pass
 
             # Collect passing stats
-            #att
             pass_attempts = game.find('td', {'data-stat': 'pass_att'})
             if pass_attempts is not None and len(pass_attempts) > 0:
                 stats['passing_attempts'] = int(pass_attempts.contents[0])
 
-            #cmp
             pass_completions = game.find('td', {'data-stat': 'pass_cmp'})
             if pass_completions is not None and len(pass_completions) > 0:
                 stats['passing_completions'] = int(pass_completions.contents[0])
 
-            #yds
             pass_yards = game.find('td', {'data-stat': 'pass_yds'})
             if pass_yards is not None and len(pass_yards) > 0:
                 stats['passing_yards'] = int(pass_yards.contents[0])
 
-            #td
             pass_touchdowns = game.find('td', {'data-stat': 'pass_td'})
             if pass_touchdowns is not None and len(pass_touchdowns) > 0:
                 stats['passing_touchdowns'] = int(pass_touchdowns.contents[0])
 
-            #int
             pass_interceptions = game.find('td', {'data-stat': 'pass_int'})
             if pass_interceptions is not None and len(pass_interceptions) > 0:
                 stats['passing_interceptions'] = int(pass_interceptions.contents[0])
 
-            #rate
             pass_rating = game.find('td', {'data-stat': 'pass_rating'})
             if pass_rating is not None and len(pass_rating) > 0:
                 stats['passing_rating'] = float(pass_rating.contents[0])
 
-            #sacked
             pass_sacks = game.find('td', {'data-stat': 'pass_sacked'})
             if pass_sacks is not None and len(pass_sacks) > 0:
                 stats['passing_sacks'] = int(pass_sacks.contents[0])
 
-            #sacked_yds
             pass_sacks_yards_lost = game.find('td', {'data-stat': 'pass_sacked_yds'})
             if pass_sacks_yards_lost is not None and len(pass_sacks_yards_lost) > 0:
                 stats['passing_sacks_yards_lost'] = int(pass_sacks_yards_lost.contents[0])
 
             # Collect rushing stats
-            #att
             rushing_attempts = game.find('td', {'data-stat': 'rush_att'})
             if rushing_attempts is not None and len(rushing_attempts) > 0:
                 stats['rushing_attempts'] = int(rushing_attempts.contents[0])
 
-            #yds
             rushing_yards = game.find('td', {'data-stat': 'rush_yds'})
             if rushing_yards is not None and len(rushing_yards) > 0:
                 stats['rushing_yards'] = int(rushing_yards.contents[0])
 
-            #td
             rushing_touchdowns = game.find('td', {'data-stat': 'rush_td'})
             if rushing_touchdowns is not None and len(rushing_touchdowns) > 0:
                 stats['rushing_touchdowns'] = int(rushing_touchdowns.contents[0])
 
             # Collect receiving stats
-            #target
             receiving_targets = game.find('td', {'data-stat': 'targets'})
             if receiving_targets is not None and len(receiving_targets) > 0:
                 stats['receiving_targets'] = int(receiving_targets.contents[0])
 
-            #rec
             receiving_receptions = game.find('td', {'data-stat': 'rec'})
             if receiving_receptions is not None and len(receiving_receptions) > 0:
                 stats['receiving_receptions'] = int(receiving_receptions.contents[0])
 
-            #yds
             receiving_yards = game.find('td', {'data-stat': 'rec_yds'})
             if receiving_yards is not None and len(receiving_yards) > 0:
                 stats['receiving_yards'] = int(receiving_yards.contents[0])
 
-            #td
             receiving_touchdowns = game.find('td', {'data-stat': 'rec_td'})
             if receiving_touchdowns is not None and len(receiving_touchdowns) > 0:
                 stats['receiving_touchdowns'] = int(receiving_touchdowns.contents[0])
 
             # Collect kick return stats
-            #ret
             kick_return_attempts = game.find('td', {'data-stat': 'kick_ret'})
             if kick_return_attempts is not None and len(kick_return_attempts) > 0:
                 stats['kick_return_attempts'] = int(kick_return_attempts.contents[0])
 
-            #yds
             kick_return_yards = game.find('td', {'data-stat': 'kick_ret_yds'})
             if kick_return_yards is not None and len(kick_return_yards) > 0:
                 stats['kick_return_yards'] = int(kick_return_yards.contents[0])
 
-            #td
             kick_return_touchdowns = game.find('td', {'data-stat': 'kick_ret_td'})
             if kick_return_touchdowns is not None and len(kick_return_touchdowns) > 0:
                 stats['kick_return_touchdowns'] = int(kick_return_touchdowns.contents[0])
 
             # Collect punt return stats
-            #ret
             punt_return_attempts = game.find('td', {'data-stat': 'punt_ret'})
             if punt_return_attempts is not None and len(punt_return_attempts) > 0:
                 stats['punt_return_attempts'] = int(punt_return_attempts.contents[0])
 
-            #yds
             punt_return_yards = game.find('td', {'data-stat': 'punt_ret_yds'})
             if punt_return_yards is not None and len(punt_return_yards) > 0:
                 stats['punt_return_yards'] = int(punt_return_yards.contents[0])
 
-            #td
             punt_return_touchdowns = game.find('td', {'data-stat': 'punt_ret_td'})
             if punt_return_touchdowns is not None and len(punt_return_touchdowns) > 0:
                 stats['punt_return_touchdowns'] = int(punt_return_touchdowns.contents[0])
 
             # Collect defensive stats
-            #sacks
             defense_sacks = game.find('td', {'data-stat': 'sacks'})
             if defense_sacks is not None and len(defense_sacks) > 0:
                 stats['defense_sacks'] = float(defense_sacks.contents[0])
-            
-            #qb_hits
-            defense_qb_hits = game.find('td', {'data-stat': 'qb_hits'})
-            if defense_qb_hits is not None and len(defense_qb_hits) > 0:
-                stats['defense_qb_hits'] = int(defense_qb_hits.contents[0])
 
-            #tackles_solo
             defense_tackles = game.find('td', {'data-stat': 'tackles_solo'})
             if defense_tackles is not None and len(defense_tackles) > 0:
                 stats['defense_tackles'] = int(defense_tackles.contents[0])
 
-            #tackles_assist
             defense_tackle_assists = game.find('td', {'data-stat': 'tackles_assists'})
             if defense_tackle_assists is not None and len(defense_tackle_assists) > 0:
                 stats['defense_tackle_assists'] = int(defense_tackle_assists.contents[0])
 
-            #tackles_loss
-            defense_tackle_loss = game.find('td', {'data-stat': 'tackles_loss'})
-            if defense_tackle_loss is not None and len(defense_tackle_loss) > 0:
-                stats['defense_tackle_loss'] = int(defense_tackle_loss.contents[0])
-
-            #interceptions
             defense_interceptions = game.find('td', {'data-stat': 'def_int'})
             if defense_interceptions is not None and len(defense_interceptions) > 0:
                 stats['defense_interceptions'] = int(defense_interceptions.contents[0])
 
-            #interceptions_yds
             defense_interception_yards = game.find('td', {'data-stat': 'def_int_yds'})
             if defense_interception_yards is not None and len(defense_interception_yards) > 0:
                 stats['defense_interception_yards'] = int(defense_interception_yards.contents[0])
 
-            #interceptions_tds
             defense_interception_tds = game.find('td', {'data-stat': 'def_int_td'})
             if defense_interception_tds is not None and len(defense_interception_tds) > 0:
                 stats['defense_interception_touchdowns'] = int(defense_interception_tds.contents[0])
 
-            #pass_defended
-            defense_pass_defended = game.find('td',{'data-stat': 'pass_defended'})
-            if defense_pass_defended is not None and len(defense_pass_defended) > 0:
-                stats['defense_pass_defended'] = int(defense_pass_defended.contents[0])
-
-            #safeties
             defense_safeties = game.find('td', {'data-stat': 'safety_md'})
             if defense_safeties is not None and len(defense_safeties) > 0:
                 stats['defense_safeties'] = int(defense_safeties.contents[0])
 
             # Collect kicking stats
-            #xpa
             point_after_attempts = game.find('td', {'data-stat': 'xpa'})
             if point_after_attempts is not None and len(point_after_attempts) > 0:
                 stats['point_after_attempts'] = int(point_after_attempts.contents[0])
 
-            #xpm
             point_after_makes = game.find('td', {'data-stat': 'xpm'})
             if point_after_makes is not None and len(point_after_makes) > 0:
                 stats['point_after_makes'] = int(point_after_makes.contents[0])
 
-            #fga
             field_goal_attempts = game.find('td', {'data-stat': 'fga'})
             if field_goal_attempts is not None and len(field_goal_attempts) > 0:
                 stats['field_goal_attempts'] = int(field_goal_attempts.contents[0])
 
-            #fgm
             field_goal_makes = game.find('td', {'data-stat': 'fgm'})
             if field_goal_makes is not None and len(field_goal_makes) > 0:
                 stats['field_goal_makes'] = int(field_goal_makes.contents[0])
 
             # Collect punting stats
-            #punt
             punting_attempts = game.find('td', {'data-stat': 'punt'})
             if punting_attempts is not None and len(punting_attempts) > 0:
                 stats['punting_attempts'] = int(punting_attempts.contents[0])
 
-            #punt_yds
             punting_yards = game.find('td', {'data-stat': 'punt_yds'})
             if punting_yards is not None and len(punting_yards) > 0:
                 stats['punting_yards'] = int(punting_yards.contents[0])
 
-            #punt_blocked
             punting_blocked = game.find('td', {'data-stat': 'punt_blocked'})
             if punting_blocked is not None and len(punting_blocked) > 0:
                 stats['punting_blocked'] = int(punting_blocked.contents[0])
 
             # Collect Fumble Stats
-            #fumbles
             fumbles = game.find('td', {'data-stat': 'fumbles'})
             if fumbles is not None and len(fumbles) > 0:
                 stats['fumbles'] = int(fumbles.contents[0])
 
-            #lost
             fumbles_lost = game.find('td', {'data-stat': 'fumbles_lost'})
             if fumbles_lost is not None and len(fumbles_lost) > 0:
                 stats['fumbles_lost'] = int(fumbles_lost.contents[0])
 
-            #forced
             fumbles_forced = game.find('td', {'data-stat': 'fumbles_forced'})
             if fumbles_forced is not None and len(fumbles_forced) > 0:
                 stats['fumbles_forced'] = int(fumbles_forced.contents[0])
 
-            #recovered
             fumbles_rec = game.find('td', {'data-stat': 'fumbles_rec'})
             if fumbles_rec is not None and len(fumbles_rec) > 0:
                 stats['fumbles_rec'] = int(fumbles_rec.contents[0])
-
-            #recovered_td
-            fumbles_rec_touchdowns = game.find('td',{'data-stat': 'fumbles_rec_td'})
-            if fumbles_rec_touchdowns is not None and len(fumbles_rec_touchdowns) > 0:
-                stats['fumbles_rec_touchdowns'] = int(fumbles_rec_touchdowns.contents[0])
 
             self.game_stats.append(stats)
 
@@ -662,14 +603,11 @@ class Player():
             'punt_return_touchdowns': 0,
             # Defense
             'defense_sacks': 0,
-            'defense_qb_hits' : 0,
             'defense_tackles': 0,
             'defense_tackle_assists': 0,
-            'defense_tackle_loss': 0,
             'defense_interceptions': 0,
             'defense_interception_yards': 0,
             'defense_interception_touchdowns': 0,
-            'defense_pass_defended': 0,
             'defense_safeties': 0,
             # Kicking
             'point_after_attempts': 0,
@@ -684,8 +622,7 @@ class Player():
             'fumbles': 0,
             'fumbles_lost': 0,
             'fumbles_forced': 0,
-            'fumbles_rec': 0,
-            'fumbles_rec_touchdowns': 0
+            'fumbles_rec' : 0
         }
 
     def get_seasons_with_stats(self, profile_soup):
