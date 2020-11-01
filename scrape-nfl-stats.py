@@ -497,6 +497,10 @@ class Player():
             if defense_interception_tds is not None and len(defense_interception_tds) > 0:
                 stats['defense_interception_touchdowns'] = int(defense_interception_tds.contents[0])
 
+            defense_pass_defended = game.find('td',{'data-stat': 'pass_defended'})
+            if defense_pass_defended is not None and len(defense_pass_defended) > 0:
+                stats['defense_pass_defended'] = int(defense_pass_defended.contents[0])
+
             defense_safeties = game.find('td', {'data-stat': 'safety_md'})
             if defense_safeties is not None and len(defense_safeties) > 0:
                 stats['defense_safeties'] = int(defense_safeties.contents[0])
@@ -547,6 +551,10 @@ class Player():
             fumbles_rec = game.find('td', {'data-stat': 'fumbles_rec'})
             if fumbles_rec is not None and len(fumbles_rec) > 0:
                 stats['fumbles_rec'] = int(fumbles_rec.contents[0])
+
+            fumbles_rec_td = game.find('td',{'data-stat': 'fumbles_rec_td'})
+            if fumbles_rec_td is not None and len(fumbles_rec_td) > 0:
+                stats['fumbles_rec_td'] = int(fumbles_rec_td.contents[0])
 
             self.game_stats.append(stats)
 
@@ -608,6 +616,7 @@ class Player():
             'defense_interceptions': 0,
             'defense_interception_yards': 0,
             'defense_interception_touchdowns': 0,
+            'defense_pass_defended': 0,
             'defense_safeties': 0,
             # Kicking
             'point_after_attempts': 0,
@@ -622,7 +631,8 @@ class Player():
             'fumbles': 0,
             'fumbles_lost': 0,
             'fumbles_forced': 0,
-            'fumbles_rec' : 0
+            'fumbles_rec': 0,
+            'fumbles_rec_td': 0
         }
 
     def get_seasons_with_stats(self, profile_soup):
