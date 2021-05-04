@@ -366,7 +366,10 @@ class Player():
             stats['game_id'] = game.find('td', {'data-stat': 'game_date'}).find('a', href=True)['href'].replace('/boxscores/', '').replace('.htm', '')
             stats['date'] = game.find('td', {'data-stat': 'game_date'}).contents[0].contents[0]
             stats['game_number'] = game.find('td', {'data-stat': 'game_num'}).contents[0]
-            stats['age'] = game.find('td', {'data-stat': 'age'}).contents[0]
+
+            #Commented due to errors
+            #stats['age'] = game.find('td', {'data-stat': 'age'}).contents[0]
+            
             stats['team'] = game.find('td', {'data-stat': 'team'}).contents[0].contents[0]
             if game.find('td', {'data-stat': 'game_location'}).contents == ['@']:
                 stats['game_location'] = 'A'
@@ -627,7 +630,7 @@ class Player():
             'game_id': None,
             'date': None,
             'game_number': None,
-            'age': None,
+            #'age': None, #Commented due to errors
             'team': None,
             'game_location': None,
             'opponent': None,
