@@ -117,3 +117,5 @@ test.ipynb
 .vscode/launch.json
 scraped_players_and_games.zip
 error_log
+active_players
+.vscode/test.py
